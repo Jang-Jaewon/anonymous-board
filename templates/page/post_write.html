@@ -1,0 +1,35 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-body text-end">
+            <div class="row">
+                <form method="post" id="post_form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 적어주세요.">
+                    <textarea style="resize: none; height: 150px;" class="form-control mt-4"
+                              placeholder="한번 작성한 글은 삭제할 수 없습니다."
+                              id="content"
+                              name="content"
+                    ></textarea>
+                    <input class="form-control mt-4" type="file" name="img" accept="image/*"/>
+                </form>
+                <a class="fs-5 text-decoration-none" style="color: black;font-weight: bold;cursor: pointer" id="post_write_btn">작성하기</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let post_form = document.getElementById('post_form');
+        let post_write_btn = document.getElementById('post_write_btn');
+        let content = document.getElementById('content');
+        let title = document.getElementById('title');
+
+        post_write_btn.addEventListener('click', () => {
+            if (content.value && title.value) {
+                post_form.submit();
+            } else {
+                alert("내용을 작성해주세요.")
+            }
+        });
+    </script>
+{% endblock %}
