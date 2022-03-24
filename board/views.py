@@ -49,3 +49,12 @@ def post_write(request):
             img_url=img_url
         ).save()
         return redirect('board')
+    
+    
+def post_detail(request, post_id):
+    if request.method == "GET":
+        post = Post.objects.get(id=post_id)
+        context = {
+            'post': post,
+        }
+        return render(request, 'page/post_detail.html', context)  

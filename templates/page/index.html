@@ -15,16 +15,17 @@
 
     <div class="row">
         {% for post in post_set %}
-            <div class="col-sm-6 p-2">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-weight: bold">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.content|truncatechars:"20" }}</p>
-                        <p class="card-subtitle m-0" style="font-size: 12px">{{ post.user.nickname }}
-                            <small>{{ post.reg_date|date:"Y.m.d" }}</small>
-                        </p>
-                        <span class="material-icons" style="vertical-align: bottom;font-size: 14px;color: #a8a8a8">chat_bubble_outline</span>
-                        <small class="m-0" style="vertical-align: bottom;color: #a8a8a8;font-size: 12px">{{ post.comment_set.count }}</small>
-                    </div>
+            <div class="col-6 p-2">
+                <div class="card">
+                    <a class="text-decoration-none" style="color:black;" href="{% url 'post_detail' post.id %}">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: bold">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content|truncatechars:"20" }}</p>
+                            <p class="card-subtitle m-0" style="font-size: 12px">{{ post.user.nickname }}
+                                <small>{{ post.reg_date|date:"Y.m.d" }}</small>
+                            </p>    
+                        </div>
+                    </a>
                 </div>
             </div>
         {% endfor %}
