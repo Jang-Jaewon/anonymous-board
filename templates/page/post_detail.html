@@ -32,16 +32,18 @@
                 </div>
             </div>
 
+            {% for comment in post.comment_set.all %}
             <div class="row my-2">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <p>날짜</p>
-                            <p>내용</p>
+                            <p>{{comment.created_at|date:"Y-m-d H:i:s"}}</p>
+                            <p>{{comment.content}}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
         </div>
     </div>

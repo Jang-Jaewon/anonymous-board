@@ -23,7 +23,9 @@
                             <p class="card-text">{{ post.content|truncatechars:"20" }}</p>
                             <p class="card-subtitle m-0" style="font-size: 12px">{{ post.user.nickname }}
                                 <small>{{post.created_at|date:"Y-m-d"}}</small>
-                            </p>    
+                            </p>
+                            <span class="material-icons" style="vertical-align:bottom; font-size:14px; color:#a8a8a8;">chat_bubble_outline</span>
+                            <small class="m-0" style="vertical-align:bottom; color:#a8a8a8; font-size:12px;">{{ post.comment_set.count }}</small>
                         </div>
                     </a>
                 </div>
