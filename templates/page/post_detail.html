@@ -6,13 +6,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <p class="card-title" style="font-size:bold;">제목</p>
+                    <p class="card-title" style="font-size:bold;">{{post.title}}</p>
                     <p class="card-subtitle" style="font-size: 12px;">
-                        닉네임 |
-                        <small>2000-01-01 12:12</small>
+                        {{post.user.nickname}} |
+                        <small>{{post.created_at|date:"Y-m-d H:i:s"}}</small>
                     </p>
-                    <p class="card-text" style="margin-top:10px;">내용</p>
-                    <img src="">
+                    <p class="card-text" style="margin-top:10px;">{{post.content}}</p>
+                    {% if post.img_url %}
+                        <img src="/upload/{{post.img_url}}">
+                    {% endif %}
                 </div>
             </div>
 
@@ -20,9 +22,10 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <form>
-                                <textarea class="form-control" style="resize:none; height:100px;" placeholder="매너를 지켜주세요."></textarea>
-                                <a class="fs-5 text-decoration-none fs-5 my-2" style="color: black; font-weight: bold;" id="comment_write_btn">댓글 달기</a>
+                            <form method="post" id="comment_form">
+                                {% csrf_token %}
+                                <textarea class="form-control" style="resize:none; height:100px;" name="content" id="content" placeholder="매너를 지켜주세요."></textarea>
+                                <a class="fs-5 text-decoration-none f s-5 my-2" style="color: black; font-weight: bold;" id="comment_write_btn">댓글 달기</a>
                             </form>
                         </div>
                     </div>
@@ -42,4 +45,25 @@
 
         </div>
     </div>
+    <script>
+        let comment_form = document.getElementById('comment_form');
+        let comment_write_btn = document.getElementById('comment_write_btn');
+        let content = document.getElementById('content');
+
+        comment_write_btn.addEventListener('click', () => {
+            if (content.value) {
+                comment_form.submit();
+            }
+        });
+
+        content.addEventListener('keyup', () => {
+            if (content.value) {
+                comment_write_btn.style.color = "black";
+                comment_write_btn.style.cursor = "pointer";
+            } else {
+                comment_write_btn.style.color = "gray";
+                comment_write_btn.style.cursor = "default";
+            }
+        })
+    </script>    
 {% endblock %}

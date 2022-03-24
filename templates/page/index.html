@@ -22,7 +22,7 @@
                             <h5 class="card-title" style="font-weight: bold">{{ post.title }}</h5>
                             <p class="card-text">{{ post.content|truncatechars:"20" }}</p>
                             <p class="card-subtitle m-0" style="font-size: 12px">{{ post.user.nickname }}
-                                <small>{{ post.reg_date|date:"Y.m.d" }}</small>
+                                <small>{{post.created_at|date:"Y-m-d"}}</small>
                             </p>    
                         </div>
                     </a>
